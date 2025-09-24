@@ -35,14 +35,14 @@ app.get("/api/matches", (req, res) => {
 
 const statsStmt = db.prepare(`
   SELECT 
-    UPPER(SUBSTR(Agent, 1, 1)) || LOWER(SUBSTR(Agent, 2)) as Agent,
-    ROUND(AVG(CAST(Kills AS FLOAT) / CASE WHEN Deaths = 0 THEN 1 ELSE Deaths END), 2) as average_kd,
+    UPPER(SUBSTR(TRIM(Agent), 1, 1)) || LOWER(SUBSTR(TRIM(Agent), 2)) as Agent,
+    ROUND(AVG(CAST(Kills AS FLOAT) / NULLIF(Deaths, 0)), 2) as average_kd,
     ROUND(AVG(Assists), 2) as average_assists,
     ROUND(AVG(HS_Percent), 2) as average_hs,
     ROUND(AVG(Econ), 2) as average_econ
   FROM Game_Scoreboard 
-  WHERE Agent IS NOT NULL AND TRIM(Agent) != ''
-  GROUP BY Agent
+  WHERE Agent IS NOT NULL AND LENGTH(TRIM(Agent)) > 0
+  GROUP BY TRIM(Agent)
 `);
 
 app.get("/api/agent-stats", (req, res) => {

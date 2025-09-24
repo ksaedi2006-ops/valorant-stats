@@ -39,13 +39,13 @@ async function fetchAgentStats() {
 
 function displayAgentStats(stats) {
     const container = document.querySelector('.agent-grid');
-    container.innerHTML = '';
-
     const sortedStats = [...stats].sort((a, b) => {
         const statA = getStatValue(a, currentStatType).value;
         const statB = getStatValue(b, currentStatType).value;
         return statB - statA;
     });
+    
+    const fragment = document.createDocumentFragment();
 
     sortedStats.forEach(agent => {
         const stat = getStatValue(agent, currentStatType);
@@ -80,6 +80,9 @@ function displayAgentStats(stats) {
             details.classList.toggle('show');
         });
         
-        container.appendChild(card);
+        fragment.appendChild(card);
     });
+    
+    container.innerHTML = '';
+    container.appendChild(fragment);
 }
