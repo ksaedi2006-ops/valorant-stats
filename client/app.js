@@ -1,30 +1,22 @@
-// Store current state of the application
-let currentStats = [];        // Holds all agent statistics
-let currentStatType = 'kd';  // Currently selected stat to display/sort by
+let currentStats = [];
+let currentStatType = 'kd';
 
-// Initialize the application when the page loads
 document.addEventListener('DOMContentLoaded', () => {
-    fetchAgentStats();    // Get stats from the server
-    setupStatButtons();   // Set up button click handlers
+    fetchAgentStats();
+    setupStatButtons();
 });
 
-// Set up click handlers for the stat selection buttons
 function setupStatButtons() {
     const buttons = document.querySelectorAll('.stat-button');
     buttons.forEach(button => {
         button.addEventListener('click', () => {
-            // Update button styling
             buttons.forEach(b => b.classList.remove('active'));
             button.classList.add('active');
-            
-            // Update display to show new stat type
             currentStatType = button.dataset.stat;
             displayAgentStats(currentStats);
         });
     });
 }
-
-// Get the value and label for a specific stat type from an agent object
 function getStatValue(agent, statType) {
     switch(statType) {
         case 'kd': return { value: agent.average_kd, label: 'K/D' };
