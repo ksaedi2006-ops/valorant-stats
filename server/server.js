@@ -19,16 +19,26 @@ app.get('/', (req, res) => {
 const db = new Database("valorant.sqlite", { readonly: true });
 console.log("Database connected successfully");
 
+// Check database tables
+try {
+    const tables = db.prepare("SELECT name FROM sqlite_master WHERE type='table'").all();
+    console.log("Database tables:", tables.map(t => t.name));
+} catch (err) {
+    console.error("Error checking tables:", err);
+}
+
 app.get("/ping", (req, res) => {
   res.send("pong");
 });
 
 app.get("/api/matches", (req, res) => {
   try {
+    console.log("Fetching matches...");
     const stmt = db.prepare(
       "SELECT id, match_date, player, kills, deaths, assists FROM matches ORDER BY match_date DESC LIMIT 20"
     );
     const rows = stmt.all();
+    console.log("Matches found:", rows.length);
     res.json(rows);
   } catch (err) {
     console.error("Database error:", err.message);
@@ -58,8 +68,10 @@ const statsStmt = db.prepare(`
 // API endpoint that returns agent statistics
 app.get("/api/agent-stats", (req, res) => {
   try {
+    console.log("Fetching agent stats...");
     // Execute the prepared statement and get all results
     const rows = statsStmt.all();
+    console.log("Agent stats found:", rows.length);
     res.json(rows);  // Send the results as JSON
   } catch (err) {
     // If anything goes wrong, log it and send a generic error to the client
