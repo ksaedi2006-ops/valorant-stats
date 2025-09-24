@@ -16,7 +16,7 @@ app.get('/', (req, res) => {
 
 // Connect to SQLite database
 // readonly: true means we can't accidentally modify the database
-const db = new Database("./valorant.sqlite", { readonly: true });
+const db = new Database("valorant.sqlite", { readonly: true });
 console.log("Database connected successfully");
 
 app.get("/ping", (req, res) => {
