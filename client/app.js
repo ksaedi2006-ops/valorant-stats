@@ -38,7 +38,7 @@ function getStatValue(agent, statType) {
 // Fetch agent statistics from the server
 async function fetchAgentStats() {
     try {
-        const response = await fetch('http://localhost:3000/api/agent-stats');
+        const response = await fetch('/api/agent-stats');
         currentStats = await response.json();
         displayAgentStats(currentStats);
     } catch (error) {
