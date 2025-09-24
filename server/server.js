@@ -47,11 +47,9 @@ const statsStmt = db.prepare(`
 
 app.get("/api/agent-stats", (req, res) => {
   try {
-    // Execute the prepared statement and get all results
     const rows = statsStmt.all();
-    res.json(rows);  // Send the results as JSON
+    res.json(rows);
   } catch (err) {
-    // If anything goes wrong, log it and send a generic error to the client
     console.error("Database error:", err.message);
     res.status(500).json({ error: "Internal server error" });
   }
@@ -61,5 +59,3 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
-
-// Server is now managed by Render

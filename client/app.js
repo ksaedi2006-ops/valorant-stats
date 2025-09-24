@@ -27,7 +27,6 @@ function getStatValue(agent, statType) {
     }
 }
 
-// Fetch agent statistics from the server
 async function fetchAgentStats() {
     try {
         const response = await fetch('/api/agent-stats');
@@ -38,25 +37,21 @@ async function fetchAgentStats() {
     }
 }
 
-// Display agent statistics in the grid
 function displayAgentStats(stats) {
     const container = document.querySelector('.agent-grid');
-    container.innerHTML = ''; // Clear existing cards
+    container.innerHTML = '';
 
-    // Sort agents by the currently selected stat
     const sortedStats = [...stats].sort((a, b) => {
         const statA = getStatValue(a, currentStatType).value;
         const statB = getStatValue(b, currentStatType).value;
-        return statB - statA;  // Sort in descending order
+        return statB - statA;
     });
 
-    // Create and add cards for each agent
     sortedStats.forEach(agent => {
         const stat = getStatValue(agent, currentStatType);
         const card = document.createElement('div');
         card.className = 'agent-card';
         
-        // Create card HTML with agent stats
         card.innerHTML = `
             <div class="agent-name">${agent.Agent || 'Unknown'}</div>
             <div class="kd-ratio">${stat.value}</div>
@@ -80,13 +75,11 @@ function displayAgentStats(stats) {
             </div>
         `;
         
-        // Add click handler to show/hide detailed stats
         card.addEventListener('click', () => {
             const details = card.querySelector('.details');
-            details.classList.toggle('show');  // Toggle visibility of detailed stats
+            details.classList.toggle('show');
         });
         
-        // Add the card to the grid
         container.appendChild(card);
     });
 }
