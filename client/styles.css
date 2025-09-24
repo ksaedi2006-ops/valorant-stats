@@ -1,0 +1,138 @@
+/* CSS Variables for consistent theming throughout the app
+   These colors are based on Valorant's official color scheme */
+:root {
+    --primary: #FF4655;      /* Valorant Red - used for emphasis and interactive elements */
+    --background: #0F1923;   /* Dark Blue-Black - main background color */
+    --card-bg: #1F2326;      /* Slightly lighter than background - used for cards */
+    --text: #ECE8E1;        /* Off-white - primary text color */
+    --text-secondary: #7E8791; /* Gray - secondary text color */
+    --hover-bg: #2F3438;    /* Slightly lighter than card background - for hover states */
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: var(--background);
+    color: var(--text);
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+h1 {
+    font-size: 2.5rem;
+    color: var(--primary);
+    margin: 0 0 24px 0;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+}
+
+.stat-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.stat-button {
+    background-color: var(--card-bg);
+    color: var(--text-secondary);
+    border: 2px solid transparent;
+    padding: 12px 24px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.2s ease;
+    letter-spacing: 0.05em;
+}
+
+.stat-button:hover {
+    background-color: var(--hover-bg);
+    color: var(--text);
+    transform: translateY(-1px);
+}
+
+.stat-button.active {
+    background-color: var(--primary);
+    color: var(--text);
+    border-color: var(--primary);
+}
+
+.agent-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.agent-card {
+    background-color: #1F2326;
+    border-radius: 8px;
+    padding: 20px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.agent-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(255, 70, 85, 0.2);
+}
+
+.agent-name {
+    font-size: 24px;
+    font-weight: 700;
+    color: #FF4655;
+    margin: 0 0 10px 0;
+}
+
+.kd-ratio {
+    font-size: 36px;
+    font-weight: 800;
+    color: #ECE8E1;
+    margin: 10px 0;
+}
+
+.details {
+    background-color: #262F38;
+    margin: 15px -20px -20px -20px;
+    padding: 20px;
+    display: none;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+.details.show {
+    display: block;
+}
+
+.stat-row {
+    display: flex;
+    justify-content: space-between;
+    margin: 8px 0;
+    color: #7E8791;
+}
+
+.stat-label {
+    font-size: 14px;
+}
+
+.stat-value {
+    font-weight: 600;
+    color: #ECE8E1;
+}
