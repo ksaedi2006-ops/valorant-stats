@@ -1,12 +1,11 @@
-/* CSS Variables for consistent theming throughout the app
-   These colors are based on Valorant's official color scheme */
+
 :root {
-    --primary: #FF4655;      /* Valorant Red - used for emphasis and interactive elements */
-    --background: #0F1923;   /* Dark Blue-Black - main background color */
-    --card-bg: #1F2326;      /* Slightly lighter than background - used for cards */
-    --text: #ECE8E1;        /* Off-white - primary text color */
-    --text-secondary: #7E8791; /* Gray - secondary text color */
-    --hover-bg: #2F3438;    /* Slightly lighter than card background - for hover states */
+    --primary: #FF4655;     
+    --background: #0F1923;  
+    --card-bg: #1F2326;    
+    --text: #ECE8E1;       
+    --text-secondary: #7E8791; 
+    --hover-bg: #2F3438;    
 }
 
 body {
